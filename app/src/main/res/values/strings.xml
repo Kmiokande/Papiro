@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Papiro</string>
+
+    <string name="nameTitle">Título</string>
+    <string name="nameContent">Conteúdo</string>
+    <string name="nameTags">Tags</string>
+    <string name="addNote">Adicionar nota</string>
+    <string name="share">Compartilhar</string>
+    <string name="about">Sobre</string>
+    <string name="exit">Sair</string>
+    <string name="infoAbout">O aplicativo Papiro tem o foco...</string>
+    <string name="infoShare">Faça o download do aplicativo Papiro...</string>
+    <string name="textOk">OK</string>
+    <string name="textYes">Sim</string>
+    <string name="textNo">Não</string>
+    <string name="textCancel">Cancelar</string>
+    <string name="textSave">Salvar</string>
+    <string name="addNoteExit">Deseja realmente sair?\nAo sair, toda a anotação será perdida.</string>
+</resources>
