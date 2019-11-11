@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -35,11 +36,20 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Note noteSelected = (Note) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(MainActivity.this, ModifyNoteActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private ArrayList<Note> gerarNotas() {
         ArrayList<Note> items = new ArrayList<Note>();
-        items.add(new Note("Nome do gato", "Jupi"));
+        items.add(new Note("Nome do gato", "Jupi\nFarofa\nFubá\nZezim"));
         items.add(new Note("Nome do filme", "As tranças do rei careca"));
         items.add(new Note("Meu endereço", "Rua dos anzois"));
         items.add(new Note("Izzi", "Pesadão"));

@@ -3,6 +3,8 @@
     <color name="colorPrimary">#dcbd94</color>
     <color name="colorPrimaryDark">#aa783b</color>
     <color name="colorAccent">#000</color>
+    <color name="ForestGreen">#228B22</color>
+    <color name="DarkGreen">#006400</color>
 <!--    <color name="colorPrimary">#003564</color>-->
 <!--    <color name="colorPrimaryDark">#000f25</color>-->
 <!--    <color name="colorAccent">#e54a75</color>-->
