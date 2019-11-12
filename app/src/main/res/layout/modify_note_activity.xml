@@ -35,7 +35,7 @@
         android:ems="10"
         android:gravity="top"
         android:hint="@string/nameContent"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine|text|textCapSentences"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
