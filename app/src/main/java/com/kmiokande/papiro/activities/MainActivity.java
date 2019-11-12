@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Note noteSelected = (Note) adapterView.getItemAtPosition(i);
                 Intent intent = new Intent(MainActivity.this, ModifyNoteActivity.class);
+                intent.putExtra("title", noteSelected.getTitle());
+                intent.putExtra("content", noteSelected.getContent());
                 startActivity(intent);
             }
         });

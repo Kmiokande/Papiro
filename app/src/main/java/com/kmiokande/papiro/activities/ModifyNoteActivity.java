@@ -5,23 +5,44 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.kmiokande.papiro.R;
 
 public class ModifyNoteActivity extends AppCompatActivity {
+    private EditText etTitleModify;
+    private EditText etContentModify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.modify_note_activity);
+        carregarComponentes();
+        carregarDados();
+    }
 
+    private void carregarDados() {
+        Intent intent = getIntent();
+
+        String title = intent.getStringExtra("title");
+        String content = intent.getStringExtra("content");
+
+        etTitleModify.setText(title);
+        etContentModify.setText(content);
+    }
+
+    private void carregarComponentes() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle("Modificar nota");     //Titulo para ser exibido na sua Action Bar em frente à seta
+
+        etTitleModify = findViewById(R.id.etTitleModify);
+        etContentModify = findViewById(R.id.etContentModify);
     }
 
     @Override
