@@ -17,6 +17,8 @@ import com.kmiokande.papiro.R;
 public class ModifyNoteActivity extends AppCompatActivity {
     private EditText etTitleModify;
     private EditText etContentModify;
+    private String titleDefault;
+    private String contentDefault;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class ModifyNoteActivity extends AppCompatActivity {
 
         String title = intent.getStringExtra("title");
         String content = intent.getStringExtra("content");
+        titleDefault = title;
+        contentDefault = content;
 
         etTitleModify.setText(title);
         etContentModify.setText(content);
@@ -57,7 +61,12 @@ public class ModifyNoteActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            finish();
+            if (!etTitleModify.getText().toString().equals(titleDefault) || !etContentModify.getText().toString().equals(contentDefault)) {
+                sair();
+            }
+            else {
+                finish();
+            }
         }
         else if (id == R.id.actionSaveModify) {
             return true;
@@ -79,6 +88,11 @@ public class ModifyNoteActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        sair();
+        if (!etTitleModify.getText().toString().equals(titleDefault) || !etContentModify.getText().toString().equals(contentDefault)) {
+            sair();
+        }
+        else {
+            finish();
+        }
     }
 }
