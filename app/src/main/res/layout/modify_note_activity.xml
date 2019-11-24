@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".activities.ModifyNoteActivity">
 
     <EditText
@@ -15,10 +16,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:drawableStart="@drawable/ic_title_black_24dp"
+        android:background="@drawable/edit_text_background"
         android:ems="10"
         android:hint="@string/nameTitle"
         android:inputType="textPersonName"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,10 +35,13 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/edit_text_background"
         android:ems="10"
         android:gravity="top"
         android:hint="@string/nameContent"
         android:inputType="textMultiLine|text|textCapSentences"
+        android:padding="10dp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
