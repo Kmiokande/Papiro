@@ -1,5 +1,7 @@
 package com.kmiokande.papiro.models;
 
+import android.content.ContentValues;
+
 import java.util.Calendar;
 
 public class Note {
@@ -12,14 +14,6 @@ public class Note {
     public Note(String title, String content) {
         this.title = title;
         this.content = content;
-    }
-
-    public Note(Integer id, String title, String content, Calendar dateCreated, Calendar dateModified) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.dateCreated = dateCreated;
-        this.dateModified = dateModified;
     }
 
     public Integer getId() {
@@ -60,5 +54,14 @@ public class Note {
 
     public void setDateModified(Calendar dateModified) {
         this.dateModified = dateModified;
+    }
+
+    public ContentValues getContentValues() {
+        ContentValues cv = new ContentValues();
+
+        cv.put("title", getTitle());
+        cv.put("content", getContent());
+
+        return cv;
     }
 }

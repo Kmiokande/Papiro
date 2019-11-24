@@ -5,24 +5,32 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.kmiokande.papiro.R;
 
 public class AddNoteActivity extends AppCompatActivity {
+    private EditText etTitle;
+    private EditText etContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_note_activity);
+        carregarComponentes();
+    }
 
+    private void carregarComponentes() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle("Adicionar nota");     //Titulo para ser exibido na sua Action Bar em frente à seta
+
+        etTitle = findViewById(R.id.etTitle);
+        etContent = findViewById(R.id.etContent);
     }
 
     @Override
