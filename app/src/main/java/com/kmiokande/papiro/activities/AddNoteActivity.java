@@ -33,6 +33,15 @@ public class AddNoteActivity extends AppCompatActivity {
         etContent = findViewById(R.id.etContent);
     }
 
+    private void verificarConteudo() {
+        if (!etTitle.getText().toString().equals("") || !etContent.getText().toString().equals("")) {
+            sair();
+        }
+        else {
+            finish();
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -45,7 +54,7 @@ public class AddNoteActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            finish();
+            verificarConteudo();
         }
         else if (id == R.id.actionSave) {
             return true;
@@ -64,6 +73,6 @@ public class AddNoteActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        sair();
+        verificarConteudo();
     }
 }

@@ -49,6 +49,15 @@ public class ModifyNoteActivity extends AppCompatActivity {
         etContentModify = findViewById(R.id.etContentModify);
     }
 
+    private void verificarConteudo() {
+        if (!etTitleModify.getText().toString().equals(titleDefault) || !etContentModify.getText().toString().equals(contentDefault)) {
+            sair();
+        }
+        else {
+            finish();
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -61,12 +70,7 @@ public class ModifyNoteActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            if (!etTitleModify.getText().toString().equals(titleDefault) || !etContentModify.getText().toString().equals(contentDefault)) {
-                sair();
-            }
-            else {
-                finish();
-            }
+            verificarConteudo();
         }
         else if (id == R.id.actionSaveModify) {
             return true;
@@ -88,11 +92,6 @@ public class ModifyNoteActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!etTitleModify.getText().toString().equals(titleDefault) || !etContentModify.getText().toString().equals(contentDefault)) {
-            sair();
-        }
-        else {
-            finish();
-        }
+        verificarConteudo();
     }
 }
