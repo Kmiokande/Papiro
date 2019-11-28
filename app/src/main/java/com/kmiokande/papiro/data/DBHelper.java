@@ -31,11 +31,11 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void salvarLivro(Note note) throws SQLException {
+    public void salvarNota(Note note) throws SQLException {
         openDB();
 
         dbInstance.insert("notes", null, note.getContentValues());
-        Toast.makeText(context, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Nota criada com sucesso!", Toast.LENGTH_SHORT).show();
 
         closeDB();
     }

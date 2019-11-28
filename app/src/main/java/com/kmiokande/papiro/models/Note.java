@@ -11,6 +11,9 @@ public class Note {
     private Calendar dateCreated;
     private Calendar dateModified;
 
+    public Note() {
+    }
+
     public Note(String title, String content) {
         this.title = title;
         this.content = content;

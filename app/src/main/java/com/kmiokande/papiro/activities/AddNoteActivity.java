@@ -17,17 +17,22 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.kmiokande.papiro.R;
+import com.kmiokande.papiro.data.DBHelper;
 import com.kmiokande.papiro.fragment.TimePickerFragment;
+import com.kmiokande.papiro.models.Note;
 
 public class AddNoteActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private EditText etTitle;
     private EditText etContent;
+    private Note note = new Note();
+    private DBHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_note_activity);
         carregarComponentes();
+        db = new DBHelper(this);
     }
 
     private void carregarComponentes() {
@@ -48,6 +53,22 @@ public class AddNoteActivity extends AppCompatActivity implements TimePickerDial
         }
     }
 
+    private void salvar() {
+    	try {
+			String title = etTitle.getText().toString();
+			String content = etContent.getText().toString();
+
+			note.setTitle(title);
+			note.setContent(content);
+
+			db.salvarNota(note);
+			finish();
+		}
+    	catch (Exception e) {
+			Toast.makeText(this, R.string.errorSave, Toast.LENGTH_LONG).show();
+		}
+	}
+
 	@Override
 	public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
     	Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
@@ -55,6 +76,7 @@ public class AddNoteActivity extends AppCompatActivity implements TimePickerDial
     	intent.putExtra(AlarmClock.EXTRA_HOUR, hourOfDay);
     	intent.putExtra(AlarmClock.EXTRA_MINUTES, minute);
     	startActivity(intent);
+    	salvar();
 	}
 
 	@Override
@@ -82,6 +104,12 @@ public class AddNoteActivity extends AppCompatActivity implements TimePickerDial
 			return true;
 		}
         else if (id == R.id.actionSave) {
+			if (etTitle.getText().toString().equals("") || etContent.getText().toString().equals("")) {
+				Toast.makeText(this, "Uma nota não pode ser criada se estiver em branco!", Toast.LENGTH_LONG).show();
+			}
+			else {
+				salvar();
+			}
             return true;
         }
 
