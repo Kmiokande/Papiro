@@ -20,19 +20,21 @@ import com.kmiokande.papiro.R;
 import com.kmiokande.papiro.data.DBHelper;
 import com.kmiokande.papiro.fragment.TimePickerFragment;
 import com.kmiokande.papiro.models.Note;
+import com.kmiokande.papiro.utility.NoteDAO;
 
 public class AddNoteActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private EditText etTitle;
     private EditText etContent;
     private Note note = new Note();
-    private DBHelper db;
+    private NoteDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_note_activity);
         carregarComponentes();
-        db = new DBHelper(this);
+
+        dao = new NoteDAO(this);
     }
 
     private void carregarComponentes() {
@@ -53,18 +55,18 @@ public class AddNoteActivity extends AppCompatActivity implements TimePickerDial
         }
     }
 
-    private void salvar() {
-    	try {
+	private void salvar() {
+		try {
 			String title = etTitle.getText().toString();
 			String content = etContent.getText().toString();
 
 			note.setTitle(title);
 			note.setContent(content);
 
-			db.salvarNota(note);
+			dao.salvarNota(note);
 			finish();
 		}
-    	catch (Exception e) {
+		catch (Exception e) {
 			Toast.makeText(this, R.string.errorSave, Toast.LENGTH_LONG).show();
 		}
 	}

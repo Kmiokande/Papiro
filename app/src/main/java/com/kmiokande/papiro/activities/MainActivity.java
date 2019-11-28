@@ -1,6 +1,7 @@
 package com.kmiokande.papiro.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,24 +22,35 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.kmiokande.papiro.R;
 import com.kmiokande.papiro.adapter.AdapterNote;
+import com.kmiokande.papiro.data.DBHelper;
 import com.kmiokande.papiro.models.Note;
+import com.kmiokande.papiro.utility.NoteDAO;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private ListView listView;
+    private NoteDAO dao;
+    private ArrayList<Note> notes;
+    private ArrayList<Note> refresh = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        // Adapter
-        AdapterNote adapter = new AdapterNote(this, gerarNotas());
+        dao = new NoteDAO(this);
+        notes = dao.obterNotas();
+        refresh.addAll(notes);
 
-        ListView listView = findViewById(R.id.listView);
+        // Adapter
+        AdapterNote adapter = new AdapterNote(this, refresh);
+
+        listView = findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -52,19 +66,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private ArrayList<Note> gerarNotas() {
-        ArrayList<Note> items = new ArrayList<Note>();
-        items.add(new Note("Nome do gato", "Jupi\nFarofa\nFubá\nZezim"));
-        items.add(new Note("Nome do filme", "As tranças do rei careca"));
-        items.add(new Note("Meu endereço", "Rua dos anzois"));
-        items.add(new Note("Izzi", "Pesadão"));
-        items.add(new Note("Senha", "123456789"));
-        items.add(new Note("Valor que estou devendo na biqueira", "3755,00"));
-        items.add(new Note("Serial do windows", "WDFG-123R-GGFR-34TF"));
-        items.add(new Note("Quilometragem da proxima revisão", "1145.00"));
-        items.add(new Note("Ultima nota", "Finalizado"));
-
-        return items;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        notes = dao.obterNotas();
+        refresh.clear();
+        refresh.addAll(notes);
+        listView.invalidateViews();
     }
 
     @Override
