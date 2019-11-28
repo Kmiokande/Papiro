@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kmiokande.papiro">
 
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,8 +30,6 @@
         <activity
             android:name=".activities.ModifyNoteActivity"
             android:screenOrientation="portrait"/>
-        
-        <receiver android:name=".utility.AlertReciver"/>
     </application>
 
 </manifest>

@@ -1,37 +1,27 @@
 package com.kmiokande.papiro.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.kmiokande.papiro.R;
 import com.kmiokande.papiro.fragment.TimePickerFragment;
-import com.kmiokande.papiro.utility.AlertReciver;
-
-import java.text.DateFormat;
-import java.util.Calendar;
 
 public class AddNoteActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private EditText etTitle;
     private EditText etContent;
-    private TextView tvAlarmAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +37,6 @@ public class AddNoteActivity extends AppCompatActivity implements TimePickerDial
 
         etTitle = findViewById(R.id.etTitle);
         etContent = findViewById(R.id.etContent);
-		tvAlarmAdd = findViewById(R.id.tvAlarmAdd);
     }
 
     private void verificarConteudo() {
@@ -59,44 +48,14 @@ public class AddNoteActivity extends AppCompatActivity implements TimePickerDial
         }
     }
 
-
-	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 	@Override
 	public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-		Calendar c = Calendar.getInstance();
-		c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-		c.set(Calendar.MINUTE, minute);
-		c.set(Calendar.SECOND, 0);
-		updateTimeText(c);
-		startAlarm(c);
+    	Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
+		intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Papiro: " + etTitle.getText().toString());
+    	intent.putExtra(AlarmClock.EXTRA_HOUR, hourOfDay);
+    	intent.putExtra(AlarmClock.EXTRA_MINUTES, minute);
+    	startActivity(intent);
 	}
-
-	private void updateTimeText(Calendar c) {
-    	String timeText = "Alarme adicionado: ";
-    	timeText += DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime());
-    	tvAlarmAdd.setText(timeText);
-	}
-
-	@RequiresApi(api = Build.VERSION_CODES.KITKAT)
-	private void startAlarm(Calendar c) {
-		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-		Intent intent = new Intent(this, AlertReciver.class);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
-
-		if (c.before(Calendar.getInstance())) {
-			c.add(Calendar.DATE, 1);
-		}
-
-		assert alarmManager != null;
-		alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
-	}
-
-//	private void cancelAlarm() {
-//		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//		Intent intent = new Intent(this, AlertReciver.class);
-//		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
-//		alarmManager.cancel(pendingIntent);
-//	}
 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,8 +72,13 @@ public class AddNoteActivity extends AppCompatActivity implements TimePickerDial
             verificarConteudo();
         }
 		else if (id == R.id.actionAlarm) {
-			DialogFragment timePicker = new TimePickerFragment();
-			timePicker.show(getSupportFragmentManager(), "timePicker");
+			if (etTitle.getText().toString().equals("") || etContent.getText().toString().equals("")) {
+				Toast.makeText(this, "Preencha os campos antes de adicionar um alarme", Toast.LENGTH_LONG).show();
+			}
+			else {
+				DialogFragment timePicker = new TimePickerFragment();
+				timePicker.show(getSupportFragmentManager(), "timePicker");
+			}
 			return true;
 		}
         else if (id == R.id.actionSave) {
