@@ -28,6 +28,8 @@
         <activity
             android:name=".activities.ModifyNoteActivity"
             android:screenOrientation="portrait"/>
+        
+        <receiver android:name=".utility.AlertReciver"/>
     </application>
 
 </manifest>
