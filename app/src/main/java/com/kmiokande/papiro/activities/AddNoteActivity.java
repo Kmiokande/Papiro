@@ -46,7 +46,7 @@ public class AddNoteActivity extends AppCompatActivity implements TimePickerDial
     }
 
     private void verificarConteudo() {
-        if (!etTitle.getText().toString().equals("") || !etContent.getText().toString().equals("")) {
+        if (!etTitle.getText().toString().isEmpty() || !etContent.getText().toString().isEmpty()) {
             sair();
         }
         else {
@@ -95,7 +95,7 @@ public class AddNoteActivity extends AppCompatActivity implements TimePickerDial
             verificarConteudo();
         }
 		else if (id == R.id.actionAlarm) {
-			if (etTitle.getText().toString().equals("") || etContent.getText().toString().equals("")) {
+			if (etTitle.getText().toString().isEmpty() || etContent.getText().toString().isEmpty()) {
 				Toast.makeText(this, "Preencha os campos antes de adicionar um alarme", Toast.LENGTH_LONG).show();
 			}
 			else {
@@ -105,7 +105,7 @@ public class AddNoteActivity extends AppCompatActivity implements TimePickerDial
 			return true;
 		}
         else if (id == R.id.actionSave) {
-			if (etTitle.getText().toString().equals("") || etContent.getText().toString().equals("")) {
+			if (etTitle.getText().toString().isEmpty() || etContent.getText().toString().isEmpty()) {
 				Toast.makeText(this, "Uma nota não pode ser criada se estiver em branco!", Toast.LENGTH_LONG).show();
 			}
 			else {
