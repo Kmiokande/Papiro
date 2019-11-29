@@ -103,6 +103,19 @@ public class ModifyNoteActivity extends AppCompatActivity implements TimePickerD
             return true;
         }
         else if (id == R.id.actionSaveModify) {
+            if (!etTitleModify.getText().toString().equals(titleDefault) || !etContentModify.getText().toString().equals(contentDefault)) {
+                try {
+                    dao.alterar(idDefault, etTitleModify.getText().toString(), etContentModify.getText().toString());
+                    finish();
+                }
+                catch (Exception e) {
+                    Toast.makeText(ModifyNoteActivity.this, "Erro ao modificar nota!", Toast.LENGTH_LONG).show();
+                }
+
+            }
+            else {
+                Toast.makeText(ModifyNoteActivity.this, "Você não pode salvar uma nota que não foi alterada!", Toast.LENGTH_LONG).show();
+            }
             return true;
         }
         else if (id == R.id.actionDeleteModify) {

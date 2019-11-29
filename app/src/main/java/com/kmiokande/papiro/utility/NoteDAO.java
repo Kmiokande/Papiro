@@ -1,5 +1,6 @@
 package com.kmiokande.papiro.utility;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -43,6 +44,18 @@ public class NoteDAO {
 		}
 		cursor.close();
 		return notes;
+	}
+
+	public void alterar(Integer id, String title, String content) throws SQLException {
+		ContentValues valores;
+		openDB();
+
+		valores = new ContentValues();
+		valores.put("title", title);
+		valores.put("content", content);
+		dbInstance.update("notes", valores, "_id = " + id, null);
+		Toast.makeText(context, "Nota modificada com sucesso!", Toast.LENGTH_SHORT).show();
+		closeDB();
 	}
 
 	public void deletar(Integer id) throws SQLException {
