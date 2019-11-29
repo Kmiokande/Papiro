@@ -19,7 +19,6 @@ public class NoteDAO {
 	public NoteDAO(Context context) {
 		dbHelper = new DBHelper(context);
 		this.context = context;
-		//dbInstance = dbHelper.getWritableDatabase();
 	}
 
 	public void salvarNota(Note note) throws SQLException {
@@ -36,6 +35,7 @@ public class NoteDAO {
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			Note n = new Note();
+			n.setId(cursor.getInt(0));
 			n.setTitle(cursor.getString(1));
 			n.setContent(cursor.getString(2));
 			notes.add(n);
@@ -43,6 +43,13 @@ public class NoteDAO {
 		}
 		cursor.close();
 		return notes;
+	}
+
+	public void deletar(Integer id) throws SQLException {
+		openDB();
+		dbInstance.delete("notes", "_id = " +id, null);
+		Toast.makeText(context, "Nota excluída com sucesso!", Toast.LENGTH_SHORT).show();
+		closeDB();
 	}
 
 	private void openDB() throws SQLException {

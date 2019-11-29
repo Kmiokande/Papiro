@@ -3,13 +3,13 @@
 
     <string name="nameTitle">Título</string>
     <string name="nameContent">Conteúdo</string>
-    <string name="nameTags">Tags</string>
     <string name="addNote">Adicionar nota</string>
     <string name="share">Compartilhar</string>
     <string name="about">Sobre</string>
     <string name="exit">Sair</string>
-    <string name="infoAbout">O aplicativo Papiro tem o foco...</string>
-    <string name="infoShare">Faça o download do aplicativo Papiro...</string>
+    <string name="infoAbout">Papiro é um aplicativo de bloco de notas, onde o usuário pode criar suas notas e adicionar um alarme para um lembrete.
+    Foi criado para o projeto da terceira unidade da disciplina de programação para dispositivos móveis.\n\nPapiro é de código aberto e usa a liçensa MIT.</string>
+    <string name="infoShare">Conheça o Papiro, organize suas notas com este simples aplicativo.\nAcesse em: https://github.com/Kmiokande/Papiro</string>
     <string name="textOk">OK</string>
     <string name="textYes">Sim</string>
     <string name="textNo">Não</string>
@@ -20,6 +20,7 @@
     <string name="noAlarm">Nenhum alarme adicionado.</string>
     <string name="errorSave">Falha ao salvar os dados!</string>
     <string name="addNoteExit">Deseja realmente sair?\nAo sair, toda a anotação será perdida.</string>
+    <string name="deleteNote">Deseja realmente excluir essa nota?</string>
     <string name="modifyNoteExit">Deseja realmente sair?\nAo sair, todas as modificações serão perdidas.</string>
     <string name="createdIn">Criado em: 00/00/0000</string>
     <string name="modifiedIn">Última modificação em: 00/00/0000</string>

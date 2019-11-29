@@ -17,7 +17,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.kmiokande.papiro.R;
-import com.kmiokande.papiro.data.DBHelper;
 import com.kmiokande.papiro.fragment.TimePickerFragment;
 import com.kmiokande.papiro.models.Note;
 import com.kmiokande.papiro.utility.NoteDAO;

@@ -14,16 +14,22 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.kmiokande.papiro.R;
 import com.kmiokande.papiro.fragment.TimePickerFragment;
+import com.kmiokande.papiro.utility.NoteDAO;
 
 public class ModifyNoteActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
     private EditText etTitleModify;
     private EditText etContentModify;
+    private TextView tvCriado;
+    private Integer idDefault;
     private String titleDefault;
     private String contentDefault;
+    private NoteDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +37,22 @@ public class ModifyNoteActivity extends AppCompatActivity implements TimePickerD
         setContentView(R.layout.modify_note_activity);
         carregarComponentes();
         carregarDados();
+        dao = new NoteDAO(this);
     }
 
     private void carregarDados() {
         Intent intent = getIntent();
 
+        Integer id = intent.getIntExtra("id", -1);
         String title = intent.getStringExtra("title");
         String content = intent.getStringExtra("content");
+        idDefault = id;
         titleDefault = title;
         contentDefault = content;
 
         etTitleModify.setText(title);
         etContentModify.setText(content);
+        tvCriado.setText(id.toString());
     }
 
     private void carregarComponentes() {
@@ -52,6 +62,7 @@ public class ModifyNoteActivity extends AppCompatActivity implements TimePickerD
 
         etTitleModify = findViewById(R.id.etTitleModify);
         etContentModify = findViewById(R.id.etContentModify);
+        tvCriado = findViewById(R.id.tvCriado);
     }
 
     private void verificarConteudo() {
@@ -95,6 +106,17 @@ public class ModifyNoteActivity extends AppCompatActivity implements TimePickerD
             return true;
         }
         else if (id == R.id.actionDeleteModify) {
+            new AlertDialog.Builder(this).setMessage(R.string.deleteNote).setCancelable(false).setPositiveButton(R.string.textYes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    try {
+                        dao.deletar(idDefault);
+                        finish();
+                    }
+                    catch (Exception e) {
+                        Toast.makeText(ModifyNoteActivity.this, "Erro ao excluir nota!", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }).setNegativeButton(R.string.textCancel, null).show();
             return true;
         }
 

@@ -2,9 +2,10 @@ package com.kmiokande.papiro.models;
 
 import android.content.ContentValues;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Note {
+public class Note implements Serializable {
     private Integer id;
     private String title;
     private String content;

@@ -1,32 +1,23 @@
 package com.kmiokande.papiro.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.kmiokande.papiro.R;
 import com.kmiokande.papiro.adapter.AdapterNote;
-import com.kmiokande.papiro.data.DBHelper;
 import com.kmiokande.papiro.models.Note;
 import com.kmiokande.papiro.utility.NoteDAO;
 
@@ -34,6 +25,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
+    AdapterNote adapter;
     private NoteDAO dao;
     private ArrayList<Note> notes;
     private ArrayList<Note> refresh = new ArrayList<>();
@@ -48,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         refresh.addAll(notes);
 
         // Adapter
-        AdapterNote adapter = new AdapterNote(this, refresh);
+        adapter = new AdapterNote(this, refresh);
 
         listView = findViewById(R.id.listView);
         listView.setAdapter(adapter);
@@ -58,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Note noteSelected = (Note) adapterView.getItemAtPosition(i);
                 Intent intent = new Intent(MainActivity.this, ModifyNoteActivity.class);
+                intent.putExtra("id", noteSelected.getId());
                 intent.putExtra("title", noteSelected.getTitle());
                 intent.putExtra("content", noteSelected.getContent());
                 startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -114,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void menssagemSobre() {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle(getString(R.string.app_name));
+        alertDialog.setTitle(getString(R.string.about));
         alertDialog.setMessage(getString(R.string.infoAbout));
         alertDialog.setButton(Dialog.BUTTON_POSITIVE, getString(R.string.textOk), new DialogInterface.OnClickListener() {
             @Override
