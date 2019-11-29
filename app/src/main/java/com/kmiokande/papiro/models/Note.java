@@ -3,21 +3,13 @@ package com.kmiokande.papiro.models;
 import android.content.ContentValues;
 
 import java.io.Serializable;
-import java.util.Calendar;
 
 public class Note implements Serializable {
     private Integer id;
     private String title;
     private String content;
-    private Calendar dateCreated;
-    private Calendar dateModified;
 
     public Note() {
-    }
-
-    public Note(String title, String content) {
-        this.title = title;
-        this.content = content;
     }
 
     public Integer getId() {
@@ -42,22 +34,6 @@ public class Note implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Calendar getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Calendar dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public Calendar getDateModified() {
-        return dateModified;
-    }
-
-    public void setDateModified(Calendar dateModified) {
-        this.dateModified = dateModified;
     }
 
     public ContentValues getContentValues() {

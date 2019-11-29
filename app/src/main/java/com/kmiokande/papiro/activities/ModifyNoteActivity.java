@@ -25,7 +25,6 @@ import com.kmiokande.papiro.utility.NoteDAO;
 public class ModifyNoteActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener{
     private EditText etTitleModify;
     private EditText etContentModify;
-    private TextView tvCriado;
     private Integer idDefault;
     private String titleDefault;
     private String contentDefault;
@@ -52,7 +51,6 @@ public class ModifyNoteActivity extends AppCompatActivity implements TimePickerD
 
         etTitleModify.setText(title);
         etContentModify.setText(content);
-        tvCriado.setText(id.toString());
     }
 
     private void carregarComponentes() {
@@ -62,7 +60,6 @@ public class ModifyNoteActivity extends AppCompatActivity implements TimePickerD
 
         etTitleModify = findViewById(R.id.etTitleModify);
         etContentModify = findViewById(R.id.etContentModify);
-        tvCriado = findViewById(R.id.tvCriado);
     }
 
     private void verificarConteudo() {
